@@ -22,10 +22,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ReadListener;
+import jakarta.servlet.ServletInputStream;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.WriteListener;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.amazon.ask.model.Application;
 import com.amazon.ask.model.Request;
@@ -77,6 +79,27 @@ public class SkillServletTestBase {
         public int read() throws IOException {
             return in.read();
         }
+
+        @Override
+        public boolean isFinished() {
+            try {
+                return in.available() == 0;
+            } catch (IOException e) {
+                return true; // Assume finished if an error occurs
+            }
+        }
+
+        @Override
+        public boolean isReady() {
+            // Always ready to read
+            return true;
+        }
+
+        @Override
+        public void setReadListener(ReadListener readListener) {
+            // Implementation can be left empty or throw UnsupportedOperationException if not used
+            throw new UnsupportedOperationException("Not implemented");
+        }
     }
 
     /**
@@ -92,6 +115,18 @@ public class SkillServletTestBase {
         @Override
         public void write(int b) throws IOException {
             out.write(b);
+        }
+
+        @Override
+        public void setWriteListener(WriteListener writeListener) {
+            // Implementation can be left empty or throw UnsupportedOperationException if not used
+            throw new UnsupportedOperationException("Not implemented");
+        }
+
+        @Override
+        public boolean isReady() {
+            // Implementation can be left simple or return true if always ready
+            return true;
         }
     }
 

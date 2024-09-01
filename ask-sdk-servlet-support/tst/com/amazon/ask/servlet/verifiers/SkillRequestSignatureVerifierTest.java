@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.security.auth.x500.X500Principal;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.servlet.ServletConstants;

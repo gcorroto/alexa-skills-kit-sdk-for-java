@@ -16,7 +16,7 @@ package com.amazon.ask.servlet.verifiers;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.servlet.ServletConstants;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 /**
  * Servlet specific implementation of {@link AlexaHttpRequest}.
